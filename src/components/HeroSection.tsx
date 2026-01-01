@@ -20,85 +20,17 @@ const HeroSection = () => {
 
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Image - Now on Left */}
+          {/* Content */}
           <motion.div
-            initial={{ opacity: 0, x: -100 }}
+            initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="flex justify-center lg:justify-start"
-          >
-            <div className="relative">
-              {/* Background decoration */}
-              <motion.div 
-                className="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 rounded-full blur-3xl scale-110"
-                animate={{ 
-                  scale: [1.1, 1.2, 1.1],
-                  rotate: [0, 5, 0]
-                }}
-                transition={{ 
-                  duration: 4, 
-                  repeat: Infinity, 
-                  ease: "easeInOut" 
-                }}
-              />
-              
-              {/* Image container */}
-              <motion.div 
-                className="relative w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-card shadow-lg"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <img
-                  src={profileImage}
-                  alt="Divya - Developer"
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
-              
-              {/* Floating badge */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0, rotate: -10 }}
-                animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                transition={{ delay: 1, type: "spring", stiffness: 200 }}
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                className="absolute -bottom-4 -right-4 bg-card px-6 py-3 rounded-2xl shadow-card cursor-pointer"
-              >
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                  <span className="font-semibold text-foreground">Open to Work</span>
-                </div>
-              </motion.div>
-
-              {/* Orbiting elements */}
-              <motion.div
-                className="absolute -top-4 left-1/2 w-8 h-8 bg-secondary rounded-full"
-                animate={{ 
-                  y: [0, -10, 0],
-                  x: [-16, -16, -16]
-                }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <motion.div
-                className="absolute top-1/4 -left-6 w-6 h-6 bg-accent rounded-lg"
-                animate={{ 
-                  rotate: [0, 360],
-                  scale: [1, 1.2, 1]
-                }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-              />
-            </div>
-          </motion.div>
-
-          {/* Content - Now on Right */}
-          <motion.div
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.8 }}
+            className="order-2 lg:order-1"
           >
             <motion.span
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 0.2 }}
               className="section-badge mb-6"
             >
               👋 Welcome to my Portfolio
@@ -107,33 +39,19 @@ const HeroSection = () => {
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0.3 }}
               className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6 leading-tight"
             >
               Hello, I'm{' '}
-              <motion.span 
-                className="gradient-text inline-block"
-                animate={{ 
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
-              >
-                Divya
-              </motion.span>
+              <span className="gradient-text">Divya</span>
               <br />
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.8 }}
-              >
-                A Passionate Developer
-              </motion.span>
+              A Passionate Developer
             </motion.h1>
             
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
+              transition={{ delay: 0.4 }}
               className="text-lg text-muted-foreground mb-8 max-w-lg leading-relaxed"
             >
               I'm a developer driven by curiosity and creativity, focused on crafting meaningful web experiences. I love exploring new technologies, solving problems, and continuously growing my skills. Building things that make an impact excites me.
@@ -142,59 +60,72 @@ const HeroSection = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 }}
+              transition={{ delay: 0.5 }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <motion.a 
-                href="#projects" 
-                className="btn-primary inline-flex items-center justify-center gap-2"
-                whileHover={{ scale: 1.05, boxShadow: "0 10px 30px -10px hsl(var(--primary) / 0.5)" }}
-                whileTap={{ scale: 0.95 }}
-              >
+              <a href="#projects" className="btn-primary inline-flex items-center justify-center gap-2">
                 View Portfolio
-                <motion.span
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  <ArrowRight size={18} />
-                </motion.span>
-              </motion.a>
-              <motion.a 
-                href="#contact" 
-                className="btn-outline inline-flex items-center justify-center gap-2"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
+                <ArrowRight size={18} />
+              </a>
+              <a href="#contact" className="btn-outline inline-flex items-center justify-center gap-2">
                 Contact Me
                 <Download size={18} />
-              </motion.a>
+              </a>
             </motion.div>
 
             {/* Stats */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 }}
+              transition={{ delay: 0.6 }}
               className="flex gap-8 mt-12"
             >
               {[
                 { number: '5+', label: 'Projects' },
                 { number: '10+', label: 'Technologies' },
                 { number: '2+', label: 'Years Learning' },
-              ].map((stat, index) => (
-                <motion.div 
-                  key={stat.label} 
-                  className="text-center"
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.9 + index * 0.1, type: "spring" }}
-                  whileHover={{ scale: 1.1 }}
-                >
+              ].map((stat) => (
+                <div key={stat.label} className="text-center">
                   <div className="text-3xl font-display font-bold text-foreground">{stat.number}</div>
                   <div className="text-sm text-muted-foreground">{stat.label}</div>
-                </motion.div>
+                </div>
               ))}
             </motion.div>
+          </motion.div>
+
+          {/* Image */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="order-1 lg:order-2 flex justify-center"
+          >
+            <div className="relative">
+              {/* Background decoration */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 rounded-full blur-3xl scale-110" />
+              
+              {/* Image container */}
+              <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-card shadow-lg">
+                <img
+                  src={profileImage}
+                  alt="Divya - Developer"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              
+              {/* Floating badge */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.8 }}
+                className="absolute -bottom-4 -right-4 bg-card px-6 py-3 rounded-2xl shadow-card"
+              >
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
+                  <span className="font-semibold text-foreground">Open to Work</span>
+                </div>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>
