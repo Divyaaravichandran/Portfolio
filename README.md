@@ -60,6 +60,40 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
+## Contact form email (backend)
+
+This repo includes a small Node server that exposes `POST /send` and sends the contact form message to your email using Nodemailer + Gmail SMTP.
+
+### 1) Create your env file
+
+- Copy `.env.example` to `.env`
+- Fill in:
+  - `GMAIL_USER` (your Gmail address)
+  - `GMAIL_APP_PASSWORD` (a Gmail **App Password**, not your normal password)
+  - (optional) `MAIL_TO` (where you want to receive messages)
+
+### 2) Install deps
+
+```sh
+npm i
+```
+
+### 3) Run backend + frontend (two terminals)
+
+Terminal A (backend):
+
+```sh
+npm run server
+```
+
+Terminal B (frontend):
+
+```sh
+npm run dev
+```
+
+Optional: If your backend runs on a different URL/port, set `VITE_API_URL` in `.env` (example: `http://localhost:5000`).
+
 ## How can I deploy this project?
 
 Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
