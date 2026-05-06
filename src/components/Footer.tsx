@@ -18,9 +18,7 @@ const Footer = () => {
             </p>
           </div>
 
-          <div className="flex items-center gap-2 text-sm text-background/60">
-            Made with <Heart className="text-red-500 fill-red-500" size={16} /> by Divya
-          </div>
+
 
           <button
             onClick={scrollToTop}

@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion';
+import { motion, warning } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Code, Globe, Wrench, Brain, Sparkles } from 'lucide-react';
+import { Code, Globe, Wrench, Brain, Sparkles, Spade } from 'lucide-react';
 
 const skillCategories = [
   {
@@ -9,35 +9,42 @@ const skillCategories = [
     icon: Code,
     color: 'bg-teal-light',
     iconColor: 'text-primary',
-    skills: ['Java', 'C', 'Python', 'JavaScript'],
+    skills: ['Java', 'C', 'SQL', 'JavaScript'],
   },
   {
     title: 'Web Technologies',
     icon: Globe,
     color: 'bg-yellow-light',
     iconColor: 'text-secondary',
-    skills: ['HTML5', 'CSS3', 'Bootstrap', 'JavaScript (ES6+)', 'React.js', 'Angular'],
+    skills: ['HTML', 'CSS', 'Tailwind', 'React'],
   },
   {
-    title: 'Tools & Frameworks',
-    icon: Wrench,
-    color: 'bg-purple-light',
-    iconColor: 'text-accent',
-    skills: ['Node.js', 'MongoDB', 'MySQL/SQLite', 'Git & GitHub', 'VS Code'],
+  title: 'Cloud', 
+  icon: Sparkles, 
+  color: 'bg-teal-light', 
+  iconColor: 'text-primary', 
+  skills: ['AWS', 'Netlify','Render'],  
   },
   {
     title: 'Soft Skills',
     icon: Brain,
     color: 'bg-blue-light',
     iconColor: 'text-blue-500',
-    skills: ['Strong Learning Mindset', 'Clear Communication', 'Logical Thinking', 'Time Management'],
+    skills: ['Leadership', 'Adaptability', 'Logical Thinking', 'Time Management'],
   },
   {
-    title: 'AI Tools',
-    icon: Sparkles,
-    color: 'bg-teal-light',
-    iconColor: 'text-primary',
-    skills: ['ChatGPT', 'GitHub Copilot', 'Google Gemini', 'Canva AI', 'Perplexity AI', 'Notion AI', 'Hugging Face'],
+    title: 'Tools & Frameworks',
+    icon: Wrench,
+    color: 'bg-purple-light',
+    iconColor: 'text-accent',
+    skills: ['Node.js & Express.js', 'MongoDB', 'MySQL', 'Git & GitHub', 'VS Code'],
+  },
+  {
+    title: 'Core CS Concepts',
+    icon: Code,
+    color: 'bg-purple-light',
+    iconColor: 'text-accent',
+    skills: ['DBMS', 'OOPS', 'CN Basics', 'DSA Basics'],
   },
 ];
 

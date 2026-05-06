@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Download } from 'lucide-react';
-import profileImage from '@/assets/profile-divya.jpg';
+import profileImage from '@/assets/profile-pic.png';
 
 const HeroSection = () => {
   return (

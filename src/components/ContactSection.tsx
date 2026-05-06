@@ -1,14 +1,14 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { Mail, Linkedin, Github, Code2, Send, MapPin, Phone } from 'lucide-react';
+import { Mail, Linkedin, Github, Code2, Send, MapPin } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const socialLinks = [
-  { icon: Mail, href: 'mailto:divya@example.com', label: 'Email', color: 'hover:bg-red-500' },
-  { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn', color: 'hover:bg-blue-600' },
-  { icon: Github, href: 'https://github.com', label: 'GitHub', color: 'hover:bg-gray-800' },
-  { icon: Code2, href: 'https://leetcode.com', label: 'LeetCode', color: 'hover:bg-amber-500' },
+  { icon: Mail, href: 'mailto:divyaaravichandran28@gmail.com', label: 'Email', color: 'hover:bg-red-500' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/divyaaravichandran/', label: 'LinkedIn', color: 'hover:bg-blue-600' },
+  { icon: Github, href: 'https://github.com/Divyaaravichandran', label: 'GitHub', color: 'hover:bg-gray-800' },
+  { icon: Code2, href: 'https://leetcode.com/u/Divya_2812/', label: 'LeetCode', color: 'hover:bg-amber-500' },
 ];
 
 const ContactSection = () => {
@@ -26,17 +26,37 @@ const ContactSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "Message Sent! 🎉",
-      description: "Thank you for reaching out. I'll get back to you soon!",
-    });
-    
-    setFormData({ name: '', email: '', subject: '', message: '' });
-    setIsSubmitting(false);
+
+    try {
+      const apiBaseUrl = (import.meta.env.VITE_API_URL as string | undefined) ?? 'http://localhost:5000';
+
+      const response = await fetch(`${apiBaseUrl}/send`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = (await response.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+
+      if (!response.ok || !data.ok) {
+        throw new Error(data.error || 'Failed to send message.');
+      }
+
+      toast({
+        title: 'Message Sent! 🎉',
+        description: "Thank you for reaching out. I'll get back to you soon!",
+      });
+
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (err) {
+      toast({
+        title: 'Something went wrong',
+        description: err instanceof Error ? err.message : 'Please try again in a moment.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -55,8 +75,7 @@ const ContactSection = () => {
         >
           <span className="section-badge mb-4">Get In Touch</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-foreground mt-4">
-            Let's Work{' '}
-            <span className="gradient-text">Together</span>
+            Let's Work <span className="gradient-text">Together</span>
           </h2>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
             Have a project in mind or just want to say hello? I'd love to hear from you!
@@ -70,12 +89,10 @@ const ContactSection = () => {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h3 className="text-2xl font-display font-bold text-foreground mb-6">
-              Let's Connect
-            </h3>
+            <h3 className="text-2xl font-display font-bold text-foreground mb-6">Let's Connect</h3>
             <p className="text-muted-foreground mb-8 leading-relaxed">
-              I'm currently open to new opportunities and collaborations. Whether you have a project 
-              you'd like to discuss or just want to connect, feel free to reach out!
+              I'm currently open to new opportunities and collaborations. Whether you have a project you'd like to
+              discuss or just want to connect, feel free to reach out!
             </p>
 
             {/* Contact Cards */}
@@ -86,7 +103,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Email</p>
-                  <p className="font-medium text-foreground">divya@example.com</p>
+                  <p className="font-medium text-foreground">divyaaravichandran28@gmail.com</p>
                 </div>
               </div>
               <div className="flex items-center gap-4 p-4 bg-card rounded-xl border border-border">
@@ -95,7 +112,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Location</p>
-                  <p className="font-medium text-foreground">Tamil Nadu, India</p>
+                  <p className="font-medium text-foreground">Tiruppur, Tamil Nadu</p>
                 </div>
               </div>
             </div>
@@ -137,7 +154,7 @@ const ContactSection = () => {
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
                     className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                    placeholder="John Doe"
+                    placeholder="xxx"
                   />
                 </div>
                 <div>
@@ -151,7 +168,7 @@ const ContactSection = () => {
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     required
                     className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                    placeholder="john@example.com"
+                    placeholder="xxx@gmail.com"
                   />
                 </div>
               </div>
@@ -180,7 +197,7 @@ const ContactSection = () => {
                   required
                   rows={5}
                   className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none"
-                  placeholder="Tell me about your project..."
+                  placeholder="Details about your project or message..."
                 />
               </div>
               <button
@@ -206,3 +223,4 @@ const ContactSection = () => {
 };
 
 export default ContactSection;
+
