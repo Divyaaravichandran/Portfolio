@@ -1,107 +1,86 @@
-# Welcome to your Lovable project
+# Portfolio Website
 
-## Project info
+A responsive personal portfolio built with **Vite + React + TypeScript + Tailwind + shadcn-ui**.  
+Includes a working **Contact** form that can send messages to your email via a small Node server using **Nodemailer + Gmail SMTP**.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Features
 
-## How can I edit this code?
+- Modern, responsive portfolio UI
+- Animated sections (Framer Motion)
+- Contact form → sends email (backend `POST /send`)
+- Toast feedback on success / error
 
-There are several ways of editing your application.
+## Tech Stack
 
-**Use Lovable**
+- Vite, React, TypeScript
+- Tailwind CSS, shadcn-ui
+- Framer Motion
+- Node.js (Express) + Nodemailer (email)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## Contact form email (backend)
-
-This repo includes a small Node server that exposes `POST /send` and sends the contact form message to your email using Nodemailer + Gmail SMTP.
-
-### 1) Create your env file
-
-- Copy `.env.example` to `.env`
-- Fill in:
-  - `GMAIL_USER` (your Gmail address)
-  - `GMAIL_APP_PASSWORD` (a Gmail **App Password**, not your normal password)
-  - (optional) `MAIL_TO` (where you want to receive messages)
-
-### 2) Install deps
+### 1) Install dependencies
 
 ```sh
-npm i
+npm install
 ```
 
-### 3) Run backend + frontend (two terminals)
+### 2) Create environment variables
 
-Terminal A (backend):
+Copy `.env.example` to `.env` and fill in the values:
+
+- `GMAIL_USER` — your Gmail address
+- `GMAIL_APP_PASSWORD` — a **Gmail App Password** (recommended; do not use your normal password)
+- `MAIL_TO` (optional) — where you want to receive messages (defaults to `GMAIL_USER`)
+- `SERVER_PORT` (optional) — backend port (default `5000`)
+- `VITE_API_URL` (optional) — backend URL for the frontend (default `http://localhost:5000`)
+
+### 3) Run the app (2 terminals)
+
+Terminal A — backend API (sends emails):
 
 ```sh
 npm run server
 ```
 
-Terminal B (frontend):
+Terminal B — frontend:
 
 ```sh
 npm run dev
 ```
 
-Optional: If your backend runs on a different URL/port, set `VITE_API_URL` in `.env` (example: `http://localhost:5000`).
+Default URLs:
 
-## How can I deploy this project?
+- Frontend: `http://localhost:8080`
+- Backend: `http://localhost:5000`
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+## API
 
-## Can I connect a custom domain to my Lovable project?
+### `POST /send`
 
-Yes, you can!
+Sends an email containing the submitted contact form details.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Expected JSON body:
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+```json
+{ "name": "...", "email": "...", "subject": "...", "message": "..." }
+```
+
+## Scripts
+
+- `npm run dev` — start frontend (Vite)
+- `npm run server` — start email backend server
+- `npm run build` — build frontend for production
+- `npm run preview` — preview the production build locally
+- `npm run lint` — run ESLint
+
+## Deployment notes
+
+- The frontend can be deployed to any static host (Vercel/Netlify/GitHub Pages).
+- The email backend (`server/server.js`) must be deployed to a Node-compatible host (Render/Railway/Fly.io/etc.), and then set `VITE_API_URL` to that backend URL in your frontend environment.
+
+## Troubleshooting
+
+- If emails don’t send, confirm `GMAIL_USER` and `GMAIL_APP_PASSWORD` are set correctly and you’re using an **App Password**.
+- If the frontend can’t reach the backend, check `VITE_API_URL` and that the backend is running on `SERVER_PORT`.
+
