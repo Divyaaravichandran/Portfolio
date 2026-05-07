@@ -3,6 +3,7 @@ import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { Mail, Linkedin, Github, Code2, Send, MapPin } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import emailjs from '@emailjs/browser';
 
 const socialLinks = [
   { icon: Mail, href: 'mailto:divyaaravichandran28@gmail.com', label: 'Email', color: 'hover:bg-red-500' },
@@ -23,19 +24,35 @@ const ContactSection = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
-      const data = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
-      if (!res.ok || !data?.ok) throw new Error(data?.error ?? 'Failed to send message.');
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error('Email is not configured. Please set EmailJS env vars and try again.');
+      }
+
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          // Send a superset of common EmailJS template variable names so the
+          // email template can bind `{{name}}`/`{{email}}` (or `{{from_name}}`/`{{reply_to}}`).
+          name: formData.name,
+          email: formData.email,
+          from_name: formData.name,
+          from_email: formData.email,
+          reply_to: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        },
+        { publicKey },
+      );
 
       toast({
         title: 'Message sent',
@@ -46,10 +63,7 @@ const ContactSection = () => {
     } catch (err) {
       toast({
         title: 'Something went wrong',
-        description:
-          err instanceof Error
-            ? err.message
-            : 'Please try again in a moment. (Tip: make sure the email API is running.)',
+        description: err instanceof Error ? err.message : 'Please try again in a moment.',
         variant: 'destructive',
       });
     } finally {

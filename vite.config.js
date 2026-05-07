@@ -10,12 +10,6 @@ export default defineConfig({
     host: 'localhost',
     port: 8080,
     strictPort: true,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:5174',
-        changeOrigin: true,
-      },
-    },
   },
   plugins: [react()],
   resolve: {

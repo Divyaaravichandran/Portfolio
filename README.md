@@ -1,107 +1,29 @@
-# Welcome to your Lovable project
+# Portfolio (Frontend-only)
 
-## Project info
-
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
-
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+## Run locally
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Contact form (EmailJS)
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+This project sends the contact form email directly from the frontend using EmailJS (no backend).
 
-**Use GitHub Codespaces**
+1) Create an EmailJS account and set up:
+   - Email Service
+   - Email Template
+2) Create a `.env` in the project root (copy from `.env.example`) and set:
+   - `VITE_EMAILJS_SERVICE_ID`
+   - `VITE_EMAILJS_TEMPLATE_ID`
+   - `VITE_EMAILJS_PUBLIC_KEY`
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Template variables used
 
-## What technologies are used for this project?
+Your EmailJS template should reference these variables:
+- `from_name`
+- `reply_to`
+- `subject`
+- `message`
 
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## Contact form email (backend)
-
-This repo includes a small Node server that exposes `POST /send` and sends the contact form message to your email using Nodemailer + Gmail SMTP.
-
-### 1) Create your env file
-
-- Copy `.env.example` to `.env`
-- Fill in:
-  - `GMAIL_USER` (your Gmail address)
-  - `GMAIL_APP_PASSWORD` (a Gmail **App Password**, not your normal password)
-  - (optional) `MAIL_TO` (where you want to receive messages)
-
-### 2) Install deps
-
-```sh
-npm i
-```
-
-### 3) Run backend + frontend (two terminals)
-
-Terminal A (backend):
-
-```sh
-npm run server
-```
-
-Terminal B (frontend):
-
-```sh
-npm run dev
-```
-
-Optional: If your backend runs on a different URL/port, set `VITE_API_URL` in `.env` (example: `http://localhost:5000`).
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
