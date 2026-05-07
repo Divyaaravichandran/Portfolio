@@ -1,13 +1,107 @@
-## Portfolio
+# Welcome to your Lovable project
 
-### Contact form email (Nodemailer)
+## Project info
 
-This project includes a small Node.js API that sends the contact form message via SMTP using Nodemailer.
+**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
 
-1) Create `.env` (copy from `.env.example`) and fill in `SMTP_*` and `CONTACT_*`
-2) Start the API in one terminal:
-   - `npm run dev:api`
-3) Start the UI in another terminal:
-   - `npm run dev`
+## How can I edit this code?
 
-The UI calls `POST /api/contact` (proxied to the API during development).
+There are several ways of editing your application.
+
+**Use Lovable**
+
+Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+
+Changes made via Lovable will be committed automatically to this repo.
+
+**Use your preferred IDE**
+
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+
+The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+
+Follow these steps:
+
+```sh
+# Step 1: Clone the repository using the project's Git URL.
+git clone <YOUR_GIT_URL>
+
+# Step 2: Navigate to the project directory.
+cd <YOUR_PROJECT_NAME>
+
+# Step 3: Install the necessary dependencies.
+npm i
+
+# Step 4: Start the development server with auto-reloading and an instant preview.
+npm run dev
+```
+
+**Edit a file directly in GitHub**
+
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
+
+**Use GitHub Codespaces**
+
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
+
+## What technologies are used for this project?
+
+This project is built with:
+
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
+
+## Contact form email (backend)
+
+This repo includes a small Node server that exposes `POST /send` and sends the contact form message to your email using Nodemailer + Gmail SMTP.
+
+### 1) Create your env file
+
+- Copy `.env.example` to `.env`
+- Fill in:
+  - `GMAIL_USER` (your Gmail address)
+  - `GMAIL_APP_PASSWORD` (a Gmail **App Password**, not your normal password)
+  - (optional) `MAIL_TO` (where you want to receive messages)
+
+### 2) Install deps
+
+```sh
+npm i
+```
+
+### 3) Run backend + frontend (two terminals)
+
+Terminal A (backend):
+
+```sh
+npm run server
+```
+
+Terminal B (frontend):
+
+```sh
+npm run dev
+```
+
+Optional: If your backend runs on a different URL/port, set `VITE_API_URL` in `.env` (example: `http://localhost:5000`).
+
+## How can I deploy this project?
+
+Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+
+## Can I connect a custom domain to my Lovable project?
+
+Yes, you can!
+
+To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+
+Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
