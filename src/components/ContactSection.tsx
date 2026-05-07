@@ -28,30 +28,28 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      const apiBaseUrl = (import.meta.env.VITE_API_URL as string | undefined) ?? 'http://localhost:5000';
-
-      const response = await fetch(`${apiBaseUrl}/send`, {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
-      const data = (await response.json().catch(() => ({}))) as { ok?: boolean; error?: string };
-
-      if (!response.ok || !data.ok) {
-        throw new Error(data.error || 'Failed to send message.');
-      }
+      const data = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
+      if (!res.ok || !data?.ok) throw new Error(data?.error ?? 'Failed to send message.');
 
       toast({
-        title: 'Message Sent! 🎉',
-        description: "Thank you for reaching out. I'll get back to you soon!",
+        title: 'Message sent',
+        description: "Thanks for reaching out — I'll get back to you soon.",
       });
 
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (err) {
       toast({
         title: 'Something went wrong',
-        description: err instanceof Error ? err.message : 'Please try again in a moment.',
+        description:
+          err instanceof Error
+            ? err.message
+            : 'Please try again in a moment. (Tip: make sure the email API is running.)',
         variant: 'destructive',
       });
     } finally {
@@ -223,4 +221,3 @@ const ContactSection = () => {
 };
 
 export default ContactSection;
-
